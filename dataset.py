@@ -1,10 +1,9 @@
 import glob
 import random
-from torch.utils.data import Dataset, DataLoader
 from torchvision.transforms import ToTensor
+from torch.utils.data import Dataset, DataLoader
 
-
-from utils import read_image, set_seed
+from utils import set_seed, read_image
 set_seed()
 
 class MNISTDataset(Dataset):

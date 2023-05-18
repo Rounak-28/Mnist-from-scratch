@@ -1,8 +1,8 @@
 import torch
 
-from dataset import test_dataloader
-from variables import device
 from model import Net
+from variables import device
+from dataset import test_dataloader
 
 model = Net()
 model.load_state_dict(torch.load("models/model.pth"))
