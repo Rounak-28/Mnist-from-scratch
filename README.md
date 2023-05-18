@@ -8,3 +8,4 @@ currently my own implemented things:
 3. `Linear`
 4. `ReLU`
 5. `Sequential`
+6. `Flatten`

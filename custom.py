@@ -38,6 +38,7 @@ class ReLU(nn.Module):
     def forward(self, x):
         return self.relu(x)
 
+
 class Sequential(nn.Module):
     def __init__(self, *args):
         super().__init__()
@@ -46,6 +47,14 @@ class Sequential(nn.Module):
     def forward(self, x):
         for layer in self.layers:
             x = layer(x)
+        return x
+
+
+class Flatten(nn.Module):
+        
+    def forward(self, x):
+        size = x.size
+        x = x.view(size(0), -1)
         return x
 
 
@@ -63,3 +72,4 @@ class CrossEntropyLoss:
         summed = sum(per_batch_ce)
         ce = -summed / batch_size
         return ce
+
