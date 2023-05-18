@@ -9,8 +9,11 @@ class Linear(nn.Module):
         super().__init__()
         device = "cuda" if torch.cuda.is_available() else "cpu"
         root_k = (1 / in_features) ** 0.5
+        self.in_features = in_features
+        self.out_features = out_features
+        self.bias = bias
         self.w = nn.Parameter(torch.empty(in_features, out_features, device=device))
-        self.b = nn.Parameter(torch.empty(out_features, device=device)) if bias else None
+        self.b = nn.Parameter(torch.empty(out_features, device=device)) if self.bias else None
         
         nn.init.uniform_(self.w, -root_k, root_k)
         nn.init.uniform_(self.b, -root_k, root_k)
@@ -21,6 +24,9 @@ class Linear(nn.Module):
         if self.b is not None:
             x += self.b
         return x
+    
+    def __repr__(self):
+        return f"Linear(in_features={self.in_features}, out_features={self.out_features}, bias={self.bias})"
 
 
 class ReLU(nn.Module):
@@ -30,7 +36,7 @@ class ReLU(nn.Module):
         x = x.to(device)
         return torch.max(zero, x)
     
-    def __call__(self, x):
+    def forward(self, x):
         return self.relu(x)
 
 
