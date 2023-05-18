@@ -38,6 +38,16 @@ class ReLU(nn.Module):
     def forward(self, x):
         return self.relu(x)
 
+class Sequential(nn.Module):
+    def __init__(self, *args):
+        super().__init__()
+        self.layers = nn.ModuleList(args)
+
+    def forward(self, x):
+        for layer in self.layers:
+            x = layer(x)
+        return x
+
 
 class CrossEntropyLoss:
     

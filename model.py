@@ -1,11 +1,11 @@
 import torch.nn as nn
-from custom import Linear, ReLU
+from custom import Linear, ReLU, Sequential
 
 class Net(nn.Module):
     def __init__(self):
         super().__init__()
         self.flatten = nn.Flatten()
-        self.layers = nn.Sequential(
+        self.layers = Sequential(
             Linear(28*28, 512),
             ReLU(),
             Linear(512, 512),
