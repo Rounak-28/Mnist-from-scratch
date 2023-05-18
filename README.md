@@ -7,3 +7,4 @@ currently my own implemented things:
 2. `CrossEntropyLoss`
 3. `Linear`
 4. `ReLU`
+5. `Sequential`
