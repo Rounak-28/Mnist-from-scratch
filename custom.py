@@ -4,7 +4,6 @@ from variables import device
 
 
 class Linear(nn.Module):
-
     def __init__(self, in_features, out_features, bias=True):
         super().__init__()
         device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -29,7 +28,6 @@ class Linear(nn.Module):
 
 
 class ReLU(nn.Module):
-
     def relu(self, x):
         zero = torch.tensor([0]).to(device)
         x = x.to(device)
@@ -50,8 +48,7 @@ class Sequential(nn.Module):
         return x
 
 
-class Flatten(nn.Module):
-        
+class Flatten(nn.Module): 
     def forward(self, x):
         size = x.size
         x = x.view(size(0), -1)
@@ -59,7 +56,6 @@ class Flatten(nn.Module):
 
 
 class CrossEntropyLoss:
-    
     def log_softmax(self, x, dim):
         softmax = torch.exp(x) / torch.exp(x).sum(axis=dim, keepdims=True)
         return torch.log(softmax)
