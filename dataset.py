@@ -2,7 +2,6 @@ import glob
 import random
 from torchvision.transforms import ToTensor
 from torch.utils.data import Dataset, DataLoader
-
 from utils import set_seed, read_image
 set_seed()
 

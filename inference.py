@@ -1,5 +1,4 @@
 import torch
-
 from model import Net
 from variables import device
 from dataset import test_dataloader
