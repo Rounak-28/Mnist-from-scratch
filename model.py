@@ -1,5 +1,5 @@
 import torch.nn as nn
-from utils import ReLU
+from custom import ReLU
 
 class Net(nn.Module):
     def __init__(self):

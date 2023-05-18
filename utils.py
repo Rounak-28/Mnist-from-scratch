@@ -1,10 +1,11 @@
 import torch
-import torch.nn as nn
+
 import random
 import numpy as np
 from PIL import Image
 
-from variables import device
+from variables import device, lr
+
 
 def set_seed(seed=42):
     random.seed(seed)
@@ -12,8 +13,8 @@ def set_seed(seed=42):
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed(seed)
-        torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
 
 
 def read_image(path):
@@ -52,7 +53,7 @@ def train(dataloader, model, loss_fn):
         loss.backward()
 
         for p in model.parameters():
-            p.data += - 0.001 * p.grad
+            p.data += - lr * p.grad
 
         if batch % 100 == 0:
             loss, current = loss.item(), (batch + 1) * len(X)
@@ -73,15 +74,6 @@ def test(dataloader, model, loss_fn):
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
+
 def save_model(model, path):
     torch.save(model.state_dict(), path)
-
-class ReLU(nn.Module):
-
-    def relu(self, x):
-        zero = torch.tensor([0]).to(device)
-        x = x.to(device)
-        return torch.max(zero, x)
-    
-    def __call__(self, x):
-        return self.relu(x)
