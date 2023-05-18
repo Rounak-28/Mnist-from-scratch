@@ -17,7 +17,6 @@ class Linear(nn.Module):
         
         nn.init.uniform_(self.w, -root_k, root_k)
         nn.init.uniform_(self.b, -root_k, root_k)
-
     
     def forward(self, x):
         x = x @ self.w
