@@ -1,8 +1,9 @@
+
 from model import Net
-from variables import device, epochs
-from dataset import train_dataloader, test_dataloader
-from utils import train, test, save_model
 from custom import CrossEntropyLoss
+from variables import device, epochs
+from utils import train, test, save_model
+from dataset import train_dataloader, test_dataloader
 
 model = Net().to(device)
 

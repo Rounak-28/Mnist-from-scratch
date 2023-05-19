@@ -55,6 +55,25 @@ class Flatten(nn.Module):
         return x
 
 
+class BatchNorm1d(nn.Module):
+    '''not sure if this implementation is correct :( '''
+    def __init__(self, num_features, eps=1e-5, momentum=0.1):
+        super().__init__()
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.num_features = num_features
+        self.eps = eps
+        self.momentum = momentum
+        self.gamma = torch.ones(self.num_features, device=device)
+        self.beta = torch.zeros(self.num_features, device=device)
+        
+    
+    def forward(self, x):
+        mean = x.mean()
+        std = x.std()
+        x = ((x-mean)/((std+self.eps)**0.5) * self.gamma) + self.beta
+        return x
+
+
 class CrossEntropyLoss:
     def log_softmax(self, x, dim):
         softmax = torch.exp(x) / torch.exp(x).sum(axis=dim, keepdims=True)
