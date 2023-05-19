@@ -9,3 +9,4 @@ currently my own implemented things:
 4. `ReLU`
 5. `Sequential`
 6. `Flatten`
+7. `BatchNorm1d`
