@@ -66,12 +66,14 @@ class BatchNorm1d(nn.Module):
         self.gamma = torch.ones(self.num_features, device=device)
         self.beta = torch.zeros(self.num_features, device=device)
         
-    
     def forward(self, x):
         mean = x.mean()
         std = x.std()
         x = ((x-mean)/((std+self.eps)**0.5) * self.gamma) + self.beta
         return x
+    
+    def __repr__(self):
+        return f"BatchNorm1d({self.num_features}, eps={self.eps}, momentum={self.momentum})"
 
 
 class CrossEntropyLoss:
