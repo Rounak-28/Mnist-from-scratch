@@ -76,7 +76,6 @@ class BatchNorm1d(nn.Module):
         return f"BatchNorm1d({self.num_features}, eps={self.eps}, momentum={self.momentum})"
 
 
-
 class CrossEntropyLoss:
     def log_softmax(self, x, dim):
         softmax = torch.exp(x) / torch.exp(x).sum(axis=dim, keepdims=True)
