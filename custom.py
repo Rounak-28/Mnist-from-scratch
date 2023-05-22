@@ -67,8 +67,8 @@ class BatchNorm1d(nn.Module):
         self.beta = torch.zeros(self.num_features, device=device)
         
     def forward(self, x):
-        mean = x.mean()
-        std = x.std()
+        mean = x.mean(dim=1, keepdim=True)
+        std = x.std(dim=1, keepdim=True)
         x = ((x-mean)/((std+self.eps)**0.5) * self.gamma) + self.beta
         return x
     
